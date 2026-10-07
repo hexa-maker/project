@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare - Doctor Appointment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="logo"><span class="logo-icon">+</span> MediCare</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li><li><a href="#doctors">Doctors</a></li><li><a href="#services">Services</a></li><li><a href="#appointment">Appointment</a></li><li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#appointment-form" class="nav-button">Book Appointment</a>
+    </nav>
+</header>
+<main>
+<section class="hero" id="home">
+    <div class="hero-content">
+        <p class="small-heading">YOUR HEALTH, OUR PRIORITY</p>
+        <h1>Quality Healthcare <span>Made Simple.</span></h1>
+        <p class="hero-description">Book an appointment with our experienced doctors and get the medical care you deserve.</p>
+        <div class="hero-buttons"><a href="#appointment-form" class="primary-button">Book Appointment</a><a href="#doctors" class="secondary-button">View Doctors</a></div>
+        <div class="stats"><div><strong>15+</strong><span>Doctors</span></div><div><strong>10K+</strong><span>Patients</span></div><div><strong>12+</strong><span>Years Experience</span></div></div>
+    </div>
+    <div class="appointment-card" id="appointment-form">
+        <div class="doctor-avatar">👨‍⚕️</div><h2>Book an Appointment</h2><p class="card-description">Schedule your visit in a few simple steps.</p>
+        <form action="#booking-success">
+            <div class="form-group"><label for="name">Patient Name</label><input type="text" id="name" name="name" placeholder="Enter your full name" required></div>
+            <div class="form-group"><label for="doctor">Select Doctor</label><select id="doctor" name="doctor" required><option value="">Choose a doctor</option><option>Dr. Sarah Johnson - Cardiologist</option><option>Dr. Michael Smith - Dentist</option><option>Dr. Emily Brown - Pediatrician</option></select></div>
+            <div class="form-row">
+                <div class="form-group"><label for="date">Appointment Date</label><input type="date" id="date" name="date" required></div>
+                <div class="form-group"><label for="time">Appointment Time</label><select id="time" name="time" required><option value="">Select time</option><option>09:00 AM</option><option>10:00 AM</option><option>11:30 AM</option><option>02:00 PM</option><option>04:30 PM</option></select></div>
+            </div>
+            <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" placeholder="example@email.com" required></div>
+            <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" name="phone" placeholder="+1 234 567 8900" required></div>
+            <button type="submit" class="book-button">Confirm Appointment</button>
+        </form>
+        <p class="secure-text">🔒 Your information is safe and secure</p>
+    </div>
+</section>
+<section class="section" id="doctors">
+    <div class="section-heading"><p>OUR SPECIALISTS</p><h2>Meet Our Doctors</h2><span>Experienced healthcare professionals dedicated to providing excellent medical care.</span></div>
+    <div class="doctor-grid">
+        <div class="doctor-card"><div class="doctor-photo">👩‍⚕️</div><h3>Dr. Sarah Johnson</h3><p class="speciality">Cardiologist</p><p>12 years of experience in cardiovascular healthcare and treatment.</p><a href="#appointment-form">Book Appointment</a></div>
+        <div class="doctor-card"><div class="doctor-photo">👨‍⚕️</div><h3>Dr. Michael Smith</h3><p class="speciality">Dentist</p><p>Specialist in modern dentistry and preventative dental healthcare.</p><a href="#appointment-form">Book Appointment</a></div>
+        <div class="doctor-card"><div class="doctor-photo">👩‍⚕️</div><h3>Dr. Emily Brown</h3><p class="speciality">Pediatrician</p><p>Providing compassionate healthcare for infants, children and teenagers.</p><a href="#appointment-form">Book Appointment</a></div>
+    </div>
+</section>
+<section class="services-section" id="services">
+    <div class="section-heading"><p>OUR SERVICES</p><h2>Healthcare Services</h2><span>We provide quality medical services for you and your family.</span></div>
+    <div class="services-grid">
+        <div class="service-card"><div class="service-icon">❤️</div><h3>Cardiology</h3><p>Diagnosis and treatment for heart and cardiovascular conditions.</p></div>
+        <div class="service-card"><div class="service-icon">🦷</div><h3>Dental Care</h3><p>Complete dental examinations, treatments and preventative care.</p></div>
+        <div class="service-card"><div class="service-icon">👶</div><h3>Pediatrics</h3><p>Professional healthcare services dedicated to children.</p></div>
+        <div class="service-card"><div class="service-icon">🩺</div><h3>General Medicine</h3><p>Routine health examinations and general medical consultations.</p></div>
+    </div>
+</section>
+<section class="appointment-section" id="appointment"><div><p class="small-heading">EASY ONLINE BOOKING</p><h2>Ready to Meet Your Doctor?</h2><p>Schedule an appointment today. Our medical team is ready to help you.</p></div><a href="#appointment-form" class="white-button">Book Your Appointment</a></section>
+</main>
+<footer id="contact">
+    <div class="footer-container">
+        <div class="footer-about"><div class="footer-logo"><span>+</span> MediCare</div><p>Providing quality healthcare and making doctor appointments simple and convenient.</p></div>
+        <div><h3>Quick Links</h3><a href="#home">Home</a><a href="#doctors">Doctors</a><a href="#services">Services</a><a href="#appointment">Appointments</a></div>
+        <div><h3>Contact Us</h3><p>📍 123 Medical Street</p><p>📞 +1 234 567 890</p><p>✉ info@medicare.com</p></div>
+        <div><h3>Opening Hours</h3><p>Mon - Fri: 8:00 AM - 6:00 PM</p><p>Saturday: 9:00 AM - 2:00 PM</p><p>Sunday: Closed</p></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 MediCare. B.Sc. Computer Science Web Design Project.</p></div>
+</footer>
+<div id="booking-success" class="popup"><div class="popup-content"><div class="success-icon">✓</div><h2>Appointment Booked!</h2><p class="success-subtitle">Thank you for choosing MediCare.</p><p class="popup-message">Your appointment request has been successfully received.</p><div class="booking-status"><span class="status-check">✓</span><div><strong>Booking Confirmed</strong><small>Your appointment has been registered.</small></div></div><p class="confirmation-message">We look forward to seeing you!</p><a href="#home" class="popup-button">Done</a></div></div>
+</body>
+</html>
