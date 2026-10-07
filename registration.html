@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MediCare - Registration</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f1fbfa;
+            color: #17354a;
+        }
+
+        /* Header */
+        header {
+            height: 90px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 35px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            background-color: #18a58f;
+            color: white;
+            width: 52px;
+            height: 52px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .appointment-btn {
+            background-color: #18a58f;
+            color: white;
+            padding: 22px 30px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* Registration section */
+        .container {
+            width: 600px;
+            margin: 45px auto;
+            background-color: white;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #17354a;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #70808c;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #17354a;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            box-sizing: border-box;
+            border: 1px solid #cbd5d8;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #18a58f;
+        }
+
+        textarea {
+            height: 90px;
+            resize: vertical;
+        }
+
+        .register-btn {
+            width: 100%;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #18a58f;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .register-btn:hover {
+            background-color: #148f7c;
+        }
+
+        .login {
+            text-align: center;
+            margin-top: 20px;
+            color: #687984;
+        }
+
+        .login a {
+            color: #18a58f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+
+        <div class="logo">
+            <div class="logo-icon">+</div>
+            MediCare
+        </div>
+
+        <a href="#" class="appointment-btn">
+            Book Appointment
+        </a>
+
+    </header>
+
+
+    <!-- Registration Form -->
+    <div class="container">
+
+        <h1>Patient Registration</h1>
+
+        <p class="subtitle">
+            Create your MediCare account
+        </p>
+
+        <form>
+
+            <label>Full Name</label>
+            <input type="text" placeholder="Enter your full name" required>
+
+            <label>Email Address</label>
+            <input type="email" placeholder="Enter your email" required>
+
+            <label>Phone Number</label>
+            <input type="tel" placeholder="Enter your phone number" required>
+
+            <label>Date of Birth</label>
+            <input type="date" required>
+
+            <label>Gender</label>
+            <select required>
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+
+            <label>Department</label>
+            <select required>
+                <option value="">Select Department</option>
+                <option>General Medicine</option>
+                <option>Cardiology</option>
+                <option>Dental Care</option>
+                <option>Pediatrics</option>
+
+            </select>
+
+            <label>Address</label>
+            <textarea placeholder="Enter your address"></textarea>
+
+            <label>Password</label>
+            <input type="password" placeholder="Create a password" required>
+
+            <label>Confirm Password</label>
+            <input type="password" placeholder="Confirm your password" required>
+
+            <button type="submit" class="register-btn">
+                Create Account
+            </button>
+
+        </form>
+
+        <p class="login">
+            Already have an account?
+            <a href="#">Login</a>
+        </p>
+
+    </div>
+
+</body>
+</html>
