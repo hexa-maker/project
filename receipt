@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare - Appointment Receipt</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 30px 15px;
+            font-family: Arial, sans-serif;
+            background: #f1fbfa;
+            color: #17354a;
+        }
+
+        .receipt {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px #00000015;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px dashed #159b70;
+            padding-bottom: 20px;
+        }
+
+        .logo {
+            color: #159b70;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .check {
+            color: #159b70;
+            font-size: 45px;
+        }
+
+        h2 {
+            margin-bottom: 8px;
+        }
+
+        .details {
+            margin-top: 25px;
+        }
+
+        .detail {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 13px 0;
+            border-bottom: 1px solid #e5eeee;
+        }
+
+        .detail span:first-child {
+            color: #667780;
+        }
+
+        .detail span:last-child {
+            font-weight: bold;
+            text-align: right;
+            overflow-wrap: anywhere;
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 12px;
+            background: #e4f8eb;
+            color: #16834b;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .buttons a, .buttons button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 7px;
+            background: #159b70;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .buttons .back {
+            background: #17354a;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .receipt {
+                box-shadow: none;
+                margin: 0 auto;
+            }
+
+            .buttons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="receipt">
+        <div class="header">
+            <div class="logo">✚ MediCare</div>
+            <div class="check">✓</div>
+            <h2>Appointment Receipt</h2>
+            <p>Your appointment has been booked successfully.</p>
+        </div>
+
+        <div class="details">
+            <div class="detail">
+                <span>Receipt Number</span>
+                <span>MC-{{ booking.id }}</span>
+            </div>
+
+            <div class="detail">
+                <span>Patient Name</span>
+                <span>{{ booking.name }}</span>
+            </div>
+
+            <div class="detail">
+                <span>Doctor</span>
+                <span>{{ booking.doctor }}</span>
+            </div>
+
+            <div class="detail">
+                <span>Appointment Date</span>
+                <span>{{ booking.date|date:"d M Y" }}</span>
+            </div>
+
+            <div class="detail">
+                <span>Appointment Time</span>
+                <span>{{ booking.time }}</span>
+            </div>
+
+            <div class="detail">
+                <span>Email</span>
+                <span>{{ booking.email }}</span>
+            </div>
+
+            <div class="detail">
+                <span>Phone</span>
+                <span>{{ booking.phone }}</span>
+            </div>
+        </div>
+
+        <div class="status">
+            ✓ Booking Confirmation
+        </div>
+
+        <div class="buttons">
+            <button onclick="window.print()">Print Receipt</button>
+            <a class="back" href="{% url 'home' %}">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
