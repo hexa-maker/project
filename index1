@@ -1,0 +1,468 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare - Doctor Appointment</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <style>
+        .success-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .success-box {
+            background: white;
+            width: 100%;
+            max-width: 420px;
+            padding: 35px 25px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+            animation: popupShow 0.3s ease;
+        }
+
+        .success-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background: #e4f8eb;
+            color: #20a45b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            font-weight: bold;
+        }
+
+        .success-box h2 {
+            color: #183b35;
+            margin-bottom: 12px;
+        }
+
+        .success-box p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .success-button {
+            display: inline-block;
+            background: #159b70;
+            color: white;
+            text-decoration: none;
+            padding: 12px 35px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+
+        .success-button:hover {
+            background: #117d5b;
+        }
+
+        .logout-form {
+            display: inline-block;
+            margin: 0;
+        }
+
+        .logout-form button {
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        @keyframes popupShow {
+            from {
+                opacity: 0;
+                transform: translateY(15px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="success-overlay" id="successPopup">
+                <div class="success-box">
+                    <div class="success-icon">✓</div>
+                    <h2>Appointment Booked!</h2>
+                    <p class="success-subtitle">
+                        Thank you for choosing MediCare.
+                    </p>
+                    <p>{{ message }}</p>
+                    <p>
+                        Your appointment request has been received
+                        successfully.
+                    </p>
+                    <button type="button" class="success-button"
+                        onclick="document.getElementById('successPopup').remove()">
+                        Done
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<header>
+    <nav class="navbar">
+
+        <div class="logo">
+            <span class="logo-icon">+</span> MediCare
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#doctors">Doctors</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#appointment">Appointment</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="{% url 'my_bookings' %}">My Bookings</a></li>
+        </ul>
+
+        <a href="{% url 'appointment' %}" class="nav-button">
+            Book Appointment
+        </a>
+
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}"
+                  class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="nav-button">
+                    Logout
+                </button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-button">
+                Login
+            </a>
+        {% endif %}
+
+    </nav>
+</header>
+
+<main>
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <p class="small-heading">YOUR HEALTH, OUR PRIORITY</p>
+
+            <h1>
+                Quality Healthcare
+                <span>Made Simple.</span>
+            </h1>
+
+            <p class="hero-description">
+                Book an appointment with our experienced doctors
+                and get the medical care you deserve.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#appointment-form" class="primary-button">
+                    Book Appointment
+                </a>
+
+                <a href="#doctors" class="secondary-button">
+                    View Doctors
+                </a>
+            </div>
+
+            <div class="stats">
+                <div>
+                    <strong>15+</strong>
+                    <span>Doctors</span>
+                </div>
+
+                <div>
+                    <strong>10K+</strong>
+                    <span>Patients</span>
+                </div>
+
+                <div>
+                    <strong>12+</strong>
+                    <span>Years Experience</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="appointment-card" id="appointment-form">
+
+            <div class="doctor-avatar">👨‍⚕️</div>
+
+            <h2>Book an Appointment</h2>
+
+            <p class="card-description">
+                Schedule your visit in a few simple steps.
+            </p>
+
+            <form method="POST" action="">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="name">Patient Name</label>
+                    <input type="text" id="name" name="name"
+                           placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="doctor">Select Doctor</label>
+                    <select id="doctor" name="doctor" required>
+                        <option value="">Choose a doctor</option>
+                        <option value="Dr. Sarah Johnson - Cardiologist">
+                            Dr. Sarah Johnson - Cardiologist
+                        </option>
+                        <option value="Dr. Michael Smith - Dentist">
+                            Dr. Michael Smith - Dentist
+                        </option>
+                        <option value="Dr. Emily Brown - Pediatrician">
+                            Dr. Emily Brown - Pediatrician
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="date">Appointment Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">Appointment Time</label>
+                        <select id="time" name="time" required>
+                            <option value="">Select time</option>
+                            <option value="09:00 AM">09:00 AM</option>
+                            <option value="10:00 AM">10:00 AM</option>
+                            <option value="11:30 AM">11:30 AM</option>
+                            <option value="02:00 PM">02:00 PM</option>
+                            <option value="04:30 PM">04:30 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email"
+                           placeholder="example@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone"
+                           placeholder="+91 9876543210" required>
+                </div>
+
+                <button type="submit" class="book-button">
+                    Confirm Appointment
+                </button>
+            </form>
+
+            <p class="secure-text">
+                🔒 Your information is safe and secure
+            </p>
+
+        </div>
+
+    </section>
+
+    <section class="section" id="doctors">
+
+        <div class="section-heading">
+            <p>OUR SPECIALISTS</p>
+            <h2>Meet Our Doctors</h2>
+            <span>
+                Experienced healthcare professionals dedicated to
+                providing excellent medical care.
+            </span>
+        </div>
+
+        <div class="doctor-grid">
+
+            <div class="doctor-card">
+                <div class="doctor-photo">👩‍⚕️</div>
+                <h3>Dr. Sarah Johnson</h3>
+                <p class="speciality">Cardiologist</p>
+                <p>
+                    12 years of experience in cardiovascular
+                    healthcare and treatment.
+                </p>
+                <a href="#appointment-form">Book Appointment</a>
+            </div>
+
+            <div class="doctor-card">
+                <div class="doctor-photo">👨‍⚕️</div>
+                <h3>Dr. Michael Smith</h3>
+                <p class="speciality">Dentist</p>
+                <p>
+                    Specialist in modern dentistry and
+                    preventative dental healthcare.
+                </p>
+                <a href="#appointment-form">Book Appointment</a>
+            </div>
+
+            <div class="doctor-card">
+                <div class="doctor-photo">👩‍⚕️</div>
+                <h3>Dr. Emily Brown</h3>
+                <p class="speciality">Pediatrician</p>
+                <p>
+                    Providing compassionate healthcare for infants,
+                    children and teenagers.
+                </p>
+                <a href="#appointment-form">Book Appointment</a>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="services-section" id="services">
+
+        <div class="section-heading">
+            <p>OUR SERVICES</p>
+            <h2>Healthcare Services</h2>
+            <span>
+                We provide quality medical services for you and your family.
+            </span>
+        </div>
+
+        <div class="services-grid">
+
+            <div class="service-card">
+                <div class="service-icon">❤️</div>
+                <h3>Cardiology</h3>
+                <p>
+                    Diagnosis and treatment for heart and
+                    cardiovascular conditions.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🦷</div>
+                <h3>Dental Care</h3>
+                <p>
+                    Complete dental examinations, treatments
+                    and preventative care.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">👶</div>
+                <h3>Pediatrics</h3>
+                <p>
+                    Professional healthcare services dedicated to children.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🩺</div>
+                <h3>General Medicine</h3>
+                <p>
+                    Routine health examinations and general
+                    medical consultations.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="appointment-section" id="appointment">
+
+        <div>
+            <p class="small-heading">EASY ONLINE BOOKING</p>
+            <h2>Ready to Meet Your Doctor?</h2>
+            <p>
+                Schedule an appointment today. Our medical team
+                is ready to help you.
+            </p>
+        </div>
+
+        <a href="#appointment-form" class="white-button">
+            Book Your Appointment
+        </a>
+
+    </section>
+
+</main>
+
+<footer id="contact">
+
+    <div class="footer-container">
+
+        <div class="footer-about">
+            <div class="footer-logo">
+                <span>+</span> MediCare
+            </div>
+            <p>
+                Providing quality healthcare and making doctor
+                appointments simple and convenient.
+            </p>
+        </div>
+
+        <div>
+            <h3>Quick Links</h3>
+            <a href="#home">Home</a>
+            <a href="#doctors">Doctors</a>
+            <a href="#services">Services</a>
+            <a href="#appointment">Appointments</a>
+        </div>
+
+        <div>
+            <h3>Contact Us</h3>
+            <p>📍 123 Medical Street</p>
+            <p>📞 +1 234 567 890</p>
+            <p>✉ info@medicare.com</p>
+        </div>
+
+        <div>
+            <h3>Opening Hours</h3>
+            <p>Mon - Fri: 8:00 AM - 6:00 PM</p>
+            <p>Saturday: 9:00 AM - 2:00 PM</p>
+            <p>Sunday: Closed</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>
+            © 2026 MediCare. B.Sc. Computer Science Web Design Project.
+        </p>
+    </div>
+
+</footer>
+
+<script>
+    // Set today's date as the earliest selectable appointment date.
+    const dateInput = document.getElementById('date');
+
+    if (dateInput) {
+        const today = new Date();
+
+        const localToday = new Date(
+            today.getTime() - today.getTimezoneOffset() * 60000
+        ).toISOString().split('T')[0];
+
+        dateInput.min = localToday;
+    }
+</script>
+
+</body>
+</html>
