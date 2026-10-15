@@ -178,7 +178,7 @@
             </p>
 
             <div class="hero-buttons">
-                <a href="#appointment-form" class="primary-button">
+                <a href="{% url 'appointment' %}" class="primary-button">
                     Book Appointment
                 </a>
 
